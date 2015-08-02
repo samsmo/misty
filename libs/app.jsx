@@ -7,10 +7,8 @@ import Pencil from './tools/pencil.js';
 
 import "./main.less";
 
-// Currently dumb selection of tools
-// and passing lazily through props
-// The plan is to add flux in after intl
-// setup
+//TODO: 1)Implement FLUX and push history!
+//2) Implement fill algor
 export default class App extends Component {
     constructor(props) {
         super(props);
