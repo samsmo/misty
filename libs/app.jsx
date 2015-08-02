@@ -7,6 +7,10 @@ import Pencil from './tools/pencil.js';
 
 import "./main.less";
 
+// Currently dumb selection of tools
+// and passing lazily through props
+// The plan is to add flux in after intl
+// setup
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +26,7 @@ export default class App extends Component {
         return (
             <div id="misty">
                 <ToolBar />
-                <Canvas />
+                <Canvas tool={ this.state.tool }/>
             </div>
         );
     }
