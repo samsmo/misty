@@ -4,7 +4,7 @@
   "description": "Pixel drawing app for yer desktop!",
   "main": "app.js",
   "scripts": {
-    "start": "electron .",
+    "start": "webpack && electron .",
     "dev": "webpack-dev-server --hot --inline --progress --colors"
   },
   "author": "",
