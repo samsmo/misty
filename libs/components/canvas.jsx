@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import MouseActions, { sendCoordinates } from '../actions/mouse-actions.js';
 
+console.log(MouseActions);
 export default class Canvas extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +35,7 @@ export default class Canvas extends Component {
         // Broadcast coordinates to draw
         // for now we're going to be lazy and
         // call the tool on props
+        sendCoordinates({x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY});
         this.props.tool.draw({
             ctx: this.state.ctx,
             color: '#FBDACB',
