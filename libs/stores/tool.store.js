@@ -15,7 +15,7 @@ let _store = {
 
 /** Private Methods **/
 let _changeTool = function(tool) {
-        _store.tool = tool;
+        _store.tool = tool.access;
     },
     _changeColor = function(color) {
         _store.color = color;

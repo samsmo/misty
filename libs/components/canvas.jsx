@@ -31,10 +31,13 @@ export default class Canvas extends Component {
     update(e) {
         if(!this.state.dragging) return;
 
+        let x = this.clamp(e.nativeEvent.offsetX, this.props.scale),
+            y = this.clamp(e.nativeEvent.offsetY, this.props.scale);
+
         sendCoordinates({
             vec: {
-                x: e.nativeEvent.offsetX,
-                y: e.nativeEvent.offsetY,
+                x: x,
+                y: y,
             },
             tool: this.props.tool,
             data: {
@@ -42,6 +45,10 @@ export default class Canvas extends Component {
                 scale: this.props.scale
             }
         });
+    }
+
+    clamp (num, top) {
+        return (Math.floor(num / top) * top);
     }
 
     render() {
@@ -56,7 +63,8 @@ export default class Canvas extends Component {
 
         return (
             <section>
-                <canvas height={ this.state.height }
+                <canvas
+                    height={ this.state.height }
                     width={ this.state.width }
                     onMouseDown={ this.toggleDrag.bind(this) }
                     onMouseUp={ this.toggleDrag.bind(this) }
@@ -65,4 +73,4 @@ export default class Canvas extends Component {
             </section>
         );
     }
-}
+};

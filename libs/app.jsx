@@ -34,10 +34,6 @@ export default class App extends Component {
         ToolStore.removeChangeListener(this._onChange);
     }
 
-    handleVectorPush(vector) {
-        sendCoordinates(vector);
-    }
-
     _onChange() {
         this.setState({
             history: CanvasStore.getCoords(),
@@ -55,7 +51,6 @@ export default class App extends Component {
                     history={ this.state.history }
                     color= { this.state.color }
                     scale= { this.state.scale }
-
                 />
             </div>
         );
