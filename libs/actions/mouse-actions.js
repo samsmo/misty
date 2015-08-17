@@ -1,12 +1,13 @@
-import { Actions } from 'flummox';
+import AppDispatcher from '../dispatcher.js';
+import appConstants from '../constants.js';
 
-export default class MouseActions extends Actions {
+export default {
 
-    sendCoordinates({x, y}) {
-        console.log(x, y);
-        //return {
-         //   x: x,
-          //  y: y
-        //};
+    sendCoordinates(vector) {
+        AppDispatcher.handleAction({
+            actionType: appConstants.SEND_COORDINATES,
+            data: vector
+        });
     }
-}
+
+};

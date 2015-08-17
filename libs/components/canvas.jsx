@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import MouseActions, { sendCoordinates } from '../actions/mouse-actions.js';
+import { sendCoordinates } from '../actions/mouse-actions.js';
 
-console.log(MouseActions);
+console.log(sendCoordinates);
+
 export default class Canvas extends Component {
     constructor(props) {
         super(props);
@@ -35,27 +36,31 @@ export default class Canvas extends Component {
         // Broadcast coordinates to draw
         // for now we're going to be lazy and
         // call the tool on props
-        sendCoordinates({x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY});
-        this.props.tool.draw({
-            ctx: this.state.ctx,
-            color: '#FBDACB',
+        sendCoordinates({
             x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY,
-            scale: 5,
+            y: e.nativeEvent.offsetY
         });
+        /*this.props.tool.draw({
+ctx: this.state.ctx,
+color: '#FBDACB',
+x: e.nativeEvent.offsetX,
+y: e.nativeEvent.offsetY,
+scale: 5,
+});*/
     }
 
-    render() {
+        render() {
+            console.log(this.props.history);
 
-        return (
-            <section>
-                <canvas height={ this.state.height }
-                    width={ this.state.width }
-                    onMouseDown={ this.toggleDrag.bind(this) }
-                    onMouseUp={ this.toggleDrag.bind(this) }
-                    onMouseMove={ this.update.bind(this) } >
-                </canvas>
-            </section>
-        );
+            return (
+                <section>
+                    <canvas height={ this.state.height }
+                        width={ this.state.width }
+                        onMouseDown={ this.toggleDrag.bind(this) }
+                        onMouseUp={ this.toggleDrag.bind(this) }
+                        onMouseMove={ this.update.bind(this) } >
+                    </canvas>
+                </section>
+            );
+        }
     }
-}

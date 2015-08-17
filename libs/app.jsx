@@ -3,7 +3,7 @@ import ToolBar from './components/tool-bar.jsx';
 import Canvas from './components/canvas.jsx';
 
 // Not react components.
-import Pencil from './tools/pencil.js';
+//import Pencil from './tools/pencil.js';
 
 import "./main.less";
 
@@ -14,17 +14,44 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            color: '#FBDACB',
-            tool: Pencil,
+            color: toolStore.getColor(),//'#FBDACB',
+            tool: toolStore.getTool(),
             history: {},
         };
+    }
+
+    componentDidMount: function() {
+        canvasStore.addChangeListener(this._onChange);
+        toolStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount: function() {
+        canvasStore.removeChangeListener(this._onChange);
+        toolStore.removeChangeListener(this._onChange);
+    }
+
+    handleVectorPush: function(vector) {
+        sendCoordinates(vector);
+    }
+
+    _onChange: function() {
+        this.setState({
+            history: canvasStore.getCoords(),
+            tool: toolStore.getTool(),
+            color: toolStore.getColor()
+        });
     }
 
     render() {
         return (
             <div id="misty">
                 <ToolBar />
-                <Canvas tool={ this.state.tool }/>
+                <Canvas
+                    tool={ this.state.tool }
+                    history={ this.state.history }
+                    color= { this.state.color }
+
+                />
             </div>
         );
     }
