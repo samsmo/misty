@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import ToolBar from './components/tool-bar.jsx';
 import Canvas from './components/canvas.jsx';
 
+import ToolStore from './stores/tool.store.js';
+import CanvasStore from './stores/canvas.store.js';
+
 // Not react components.
-//import Pencil from './tools/pencil.js';
 
 import "./main.less";
 
@@ -14,31 +16,33 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            color: toolStore.getColor(),//'#FBDACB',
-            tool: toolStore.getTool(),
-            history: {},
+            color: ToolStore.getColor(),
+            tool: ToolStore.getTool(),
+            history: [],
+            scale: 5
         };
+
     }
 
-    componentDidMount: function() {
-        canvasStore.addChangeListener(this._onChange);
-        toolStore.addChangeListener(this._onChange);
+    componentDidMount() {
+        CanvasStore.addChangeListener(this._onChange.bind(this));
+        ToolStore.addChangeListener(this._onChange.bind(this));
     }
 
-    componentWillUnmount: function() {
-        canvasStore.removeChangeListener(this._onChange);
-        toolStore.removeChangeListener(this._onChange);
+    componentWillUnmount() {
+        CanvasStore.removeChangeListener(this._onChange);
+        ToolStore.removeChangeListener(this._onChange);
     }
 
-    handleVectorPush: function(vector) {
+    handleVectorPush(vector) {
         sendCoordinates(vector);
     }
 
-    _onChange: function() {
+    _onChange() {
         this.setState({
-            history: canvasStore.getCoords(),
-            tool: toolStore.getTool(),
-            color: toolStore.getColor()
+            history: CanvasStore.getCoords(),
+            tool: ToolStore.getTool(),
+            color: ToolStore.getColor()
         });
     }
 
@@ -50,6 +54,7 @@ export default class App extends Component {
                     tool={ this.state.tool }
                     history={ this.state.history }
                     color= { this.state.color }
+                    scale= { this.state.scale }
 
                 />
             </div>

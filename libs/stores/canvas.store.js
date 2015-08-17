@@ -1,17 +1,19 @@
 import AppDispatcher from '../dispatcher.js';
 import constants from '../constants.js';
-import objectAssign from '../react/lib/Object.assign';
+import objectAssign from 'react/lib/Object.assign';
+
+import { CHANGE_EVENT } from '../constants.js';
 import { EventEmitter } from 'events';
 
 let _store = {
     coords: []
 };
 
-let addCoordSet = function(vector) {
+let _addVector = function(vector) {
     _store.coords.push(vector);
 };
 
-let canvasStore = objectAssign({}, EventEmitter.prototype, {
+let CanvasStore = objectAssign({}, EventEmitter.prototype, {
     addChangeListener: function(cb) {
         this.on(CHANGE_EVENT, cb);
     },
@@ -28,7 +30,8 @@ AppDispatcher.register(function(payload) {
 
     switch(action.actionType) {
         case constants.SEND_COORDINATES:
-            canvasStore.emit(CHANGE_EVENT);
+            _addVector(action.data);
+            CanvasStore.emit(CHANGE_EVENT);
         break;
         default:
             return true;
@@ -37,4 +40,4 @@ AppDispatcher.register(function(payload) {
 });
 
 
-export default canvasStore;
+export default CanvasStore;

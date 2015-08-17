@@ -1,15 +1,17 @@
 import AppDispatcher from '../dispatcher.js';
 import constants from '../constants.js';
-import objectAssign from '../react/lib/Object.assign';
-import {
-    EventEmitter
-}
-from 'events';
+import objectAssign from 'react/lib/Object.assign';
+import { EventEmitter } from 'events';
+
+import { CHANGE_EVENT } from '../constants.js';
+
+import Tools from '../models/tools.js';
 
 let _store = {
     color: '#FBDACB',
-    tool: null;
-}
+    tool: Tools[0].access,
+    toolList: Tools
+};
 
 /** Private Methods **/
 let _changeTool = function(tool) {
@@ -31,6 +33,9 @@ let ToolStore = objectAssign({}, EventEmitter.prototype, {
     },
     getColor: function() {
         return _store.color;
+    },
+    getTools: function () {
+        return _store.toolList;
     }
 });
 

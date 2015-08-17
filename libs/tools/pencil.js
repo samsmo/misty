@@ -1,7 +1,8 @@
 
 export default {
-    draw: function(data) {
-        let {x, y, scale, ctx, color} = data;
+    act: function(vector, data) {
+        let { scale, ctx, color } = data,
+            { x, y } = vector;
 
         x = this.clamp(x, scale);
         y = this.clamp(y, scale);
