@@ -1,7 +1,7 @@
 
 export default {
-    act: function(vector, data) {
-        let { scale, ctx, color } = data,
+    act: function(vector, data, ctx) {
+        let { scale, color } = data,
             { x, y } = vector;
 
         x = this.clamp(x, scale);

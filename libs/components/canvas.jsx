@@ -32,21 +32,27 @@ export default class Canvas extends Component {
         if(!this.state.dragging) return;
 
         sendCoordinates({
-            x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY
+            vec: {
+                x: e.nativeEvent.offsetX,
+                y: e.nativeEvent.offsetY,
+            },
+            tool: this.props.tool,
+            data: {
+                color: '#'+Math.floor(Math.random()*16777215).toString(16),
+                scale: this.props.scale
+            }
         });
     }
 
     render() {
-        let data = {
-            ctx: this.state.ctx,
-            color: this.props.color,
-            scale: this.props.scale,
-        };
 
-        this.props.history.map( (vector) => {
-            this.props.tool.act( vector, data );
-        });
+        if(this.state.ctx) {
+            this.state.ctx.clearRect(0, 0, this.state.width, this.state.height);
+
+            this.props.history.map( ( moment ) => {
+                moment.tool.act( moment.vec, moment.data, this.state.ctx );
+            });
+        }
 
         return (
             <section>

@@ -12,8 +12,8 @@ export default class ToolBar extends Component {
     render() {
         return (
             <section>
-                {this.state.toolsList.map((tool) => {
-                    return (<div>{ tool.name }</div>);
+                {this.state.toolsList.map((tool, key) => {
+                    return (<div key={ key } >{ tool.name }</div>);
                 })}
             </section>
         );
