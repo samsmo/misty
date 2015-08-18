@@ -9,8 +9,6 @@ import CanvasStore from './stores/canvas.store.js';
 
 import "./main.less";
 
-//TODO: 1)Implement FLUX and push history!
-//2) Implement fill algor
 export default class App extends Component {
     constructor(props) {
         super(props);
