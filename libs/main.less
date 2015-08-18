@@ -5,7 +5,7 @@ body, html {
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 #misty {
@@ -16,14 +16,12 @@ body, html {
 
 section {
     display: inline-block;
-    margin: 10px;
-    vertical-align: top;
-}
-
-canvas {
     background-color: white;
     border: 1px solid #604860;
-  position: relative;
+    position: relative;
+
+    margin: 10px;
+    vertical-align: top;
 }
 
 #tool-bar {
@@ -49,3 +47,17 @@ canvas {
     }
 }
 
+#color-picker {
+    padding: 10px;
+
+    .active-color {
+        display: block;
+        height: 50px;
+        width: 50px;
+        margin: 0 auto;
+    }
+
+    input {
+        display: block;
+    }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ToolBar from './components/tool-bar.jsx';
 import Canvas from './components/canvas.jsx';
+import ColorPicker from './components/color-picker.jsx';
 
 import ToolStore from './stores/tool.store.js';
 import CanvasStore from './stores/canvas.store.js';
@@ -50,6 +51,7 @@ export default class App extends Component {
                     color= { this.state.color }
                     scale= { this.state.scale }
                 />
+                <ColorPicker color={ this.state.color } />
             </div>
         );
     }
