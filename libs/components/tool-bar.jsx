@@ -11,11 +11,15 @@ export default class ToolBar extends Component {
         };
     }
     render() {
+        let currentTool = this.props.tool;
+
         return (
             <section id="tool-bar">
                 {this.state.toolsList.map((tool, key) => {
+                    let active = currentTool === tool.name ? 'active' : '';
                     return (
                         <div
+                            className={ active }
                             onClick={ changeTool.bind(this, tool) }
                             key={ key }
                             >

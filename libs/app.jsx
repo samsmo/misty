@@ -45,9 +45,9 @@ export default class App extends Component {
     render() {
         return (
             <div id="misty">
-                <ToolBar />
+                <ToolBar tool={ this.state.tool.name } />
                 <Canvas
-                    tool={ this.state.tool }
+                    tool={ this.state.tool.access }
                     history={ this.state.history }
                     color= { this.state.color }
                     scale= { this.state.scale }

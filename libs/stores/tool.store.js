@@ -9,13 +9,13 @@ import Tools from '../models/tools.js';
 
 let _store = {
     color: '#604860',
-    tool: Tools[0].access,
+    tool: Tools[0],
     toolList: Tools
 };
 
 /** Private Methods **/
 let _changeTool = function(tool) {
-        _store.tool = tool.access;
+        _store.tool = tool;
     },
     _changeColor = function(color) {
         _store.color = color;
