@@ -15,12 +15,37 @@ body, html {
 }
 
 section {
-    background: #604860;
     display: inline-block;
     margin: 10px;
     vertical-align: top;
 }
 
 canvas {
+    background-color: white;
+    border: 1px solid #604860;
   position: relative;
 }
+
+#tool-bar {
+    background: white;
+    border: 1px solid #604860;
+    padding: 10px;
+
+    >div {
+        margin-bottom: 5px;
+
+        &:hover {
+            color: #604860;
+            cursor: pointer;
+        }
+
+        &.active {
+            color: #FBDACB;
+        }
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+}
+

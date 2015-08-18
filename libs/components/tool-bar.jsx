@@ -12,7 +12,7 @@ export default class ToolBar extends Component {
     }
     render() {
         return (
-            <section>
+            <section id="tool-bar">
                 {this.state.toolsList.map((tool, key) => {
                     return (
                         <div

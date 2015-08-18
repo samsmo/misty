@@ -32,18 +32,20 @@ export default class Canvas extends Component {
         if(!this.state.dragging) return;
 
         let x = this.clamp(e.nativeEvent.offsetX, this.props.scale),
-            y = this.clamp(e.nativeEvent.offsetY, this.props.scale);
+            y = this.clamp(e.nativeEvent.offsetY, this.props.scale),
+            tool = this.props.tool,
+            tried = {
+                scale: this.props.scale,
+                color: this.props.color
+            };
 
         sendCoordinates({
             vec: {
                 x: x,
                 y: y,
             },
-            tool: this.props.tool,
-            data: {
-                color: '#'+Math.floor(Math.random()*16777215).toString(16),
-                scale: this.props.scale
-            }
+            tool: tool,
+            data: tool.getRelevantData(tried)
         });
     }
 
