@@ -8,7 +8,7 @@ import { CHANGE_EVENT } from '../constants.js';
 import Tools from '../models/tools.js';
 
 let _store = {
-    color: '#604860',
+    color: {'r': 76, 'g': 32, 'b': 76},
     tool: Tools[0],
     toolList: Tools
 };

@@ -20,7 +20,6 @@ export default class App extends Component {
             history: [],
             scale: 5
         };
-
     }
 
     componentDidMount() {

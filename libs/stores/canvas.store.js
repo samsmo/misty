@@ -5,12 +5,12 @@ import objectAssign from 'react/lib/Object.assign';
 import { CHANGE_EVENT } from '../constants.js';
 import { EventEmitter } from 'events';
 
-let _store = {
+let _canvas_store = {
     coords: []
 };
 
 let _addVector = function(vector) {
-    _store.coords.push(vector);
+    _canvas_store.coords.push(vector);
 };
 
 let CanvasStore = objectAssign({}, EventEmitter.prototype, {
@@ -21,7 +21,7 @@ let CanvasStore = objectAssign({}, EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, cb);
     },
     getCoords: function() {
-        return _store.coords;
+        return _canvas_store.coords;
     }
 });
 
