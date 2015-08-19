@@ -1,4 +1,3 @@
-import _ from 'lodash';
 
 let _getRandomColor = function( initial ) {
         return {
@@ -22,7 +21,7 @@ export default {
 
     getRelevantData(data) {
         let { scale, color } = data,
-            temp = _.clone(color);
+            temp = color;
 
         temp = _getRandomColor(temp);
 

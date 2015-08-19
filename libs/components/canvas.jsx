@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { sendCoordinates } from '../actions/mouse-actions.js';
+import _ from 'lodash';
 
 export default class Canvas extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export default class Canvas extends Component {
             tool = this.props.tool,
             tried = {
                 scale: this.props.scale,
-                color: this.props.color
+                color: _.clone(this.props.color)
             };
 
         sendCoordinates({
