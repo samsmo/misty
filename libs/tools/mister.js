@@ -1,3 +1,5 @@
+import { rgb } from '../helpers/html.helpers.js';
+
 let _getRandomColor = function( initial ) {
         return {
             'r': _randRange(initial.r - 20, initial.r + 20),
@@ -14,7 +16,7 @@ export default {
         let { scale, color } = data,
             { x, y } = vector;
 
-        ctx.fillStyle = "rgb("+color.r+","+color.g+","+color.b+")";
+        ctx.fillStyle = rgb(color);
         ctx.fillRect(x, y, scale, scale);
     },
 
