@@ -8,13 +8,12 @@ import { CHANGE_EVENT } from '../constants.js';
 import Tools from '../models/tools.js';
 
 let _store = {
-    tool: Tools[0],
-    toolList: Tools
+    color: { 'r': 76, 'g': 32, 'b': 76 },
 };
 
 /** Private Methods **/
-let _changeTool = function(tool) {
-        _store.tool = tool;
+let _changeColor = function(color) {
+        _store.color = color;
     };
 
 let ToolStore = objectAssign({}, EventEmitter.prototype, {
@@ -24,11 +23,8 @@ let ToolStore = objectAssign({}, EventEmitter.prototype, {
     removeChangeListener: function() {
         this.removeListener(CHANGE_EVENT, cb);
     },
-    getTool: function() {
-        return _store.tool;
-    },
-    getTools: function () {
-        return _store.toolList;
+    getColor: function() {
+        return _store.color;
     }
 });
 
@@ -36,8 +32,8 @@ AppDispatcher.register(function(payload) {
     let action = payload.action;
 
     switch (action.actionType) {
-        case constants.CHANGE_TOOL:
-            _changeTool(action.data);
+        case constants.CHANGE_COLOR:
+            _changeColor(action.data);
             ToolStore.emit(CHANGE_EVENT);
             break;
         default:

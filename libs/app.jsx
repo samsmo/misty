@@ -5,6 +5,7 @@ import ColorPicker from './components/color-picker.jsx';
 
 import ToolStore from './stores/tool.store.js';
 import CanvasStore from './stores/canvas.store.js';
+import ColorStore from './stores/color.store.js';
 
 // Not react components.
 
@@ -15,7 +16,7 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            color: ToolStore.getColor(),
+            color: ColorStore.getColor(),
             tool: ToolStore.getTool(),
             history: [],
             scale: 5
@@ -25,18 +26,20 @@ export default class App extends Component {
     componentDidMount() {
         CanvasStore.addChangeListener(this._onChange.bind(this));
         ToolStore.addChangeListener(this._onChange.bind(this));
+        ColorStore.addChangeListener(this._onChange.bind(this));
     }
 
     componentWillUnmount() {
         CanvasStore.removeChangeListener(this._onChange);
         ToolStore.removeChangeListener(this._onChange);
+        ColorStore.addChangeListener(this._onChange);
     }
 
     _onChange() {
         this.setState({
             history: CanvasStore.getCoords(),
             tool: ToolStore.getTool(),
-            color: ToolStore.getColor()
+            color: ColorStore.getColor()
         });
     }
 

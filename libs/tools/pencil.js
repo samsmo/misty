@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export default {
     act(vector, data, ctx) {
         let { scale, color } = data,
@@ -10,12 +8,11 @@ export default {
     },
 
     getRelevantData(data) {
-        let { scale, color } = data,
-            temp = _.clone(color);
+        let { scale, color } = data;
 
         return {
             'scale': scale,
-            'color': temp
+            'color': color
         };
     }
 };
