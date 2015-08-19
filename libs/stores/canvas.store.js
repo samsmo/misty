@@ -29,7 +29,7 @@ AppDispatcher.register(function(payload) {
     let action = payload.action;
 
     switch(action.actionType) {
-        case constants.SEND_COORDINATES:
+        case constants.ADD_MOMENT_TO_HISTORY:
             _addVector(action.data);
             CanvasStore.emit(CHANGE_EVENT);
         break;

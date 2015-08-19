@@ -3,11 +3,18 @@ import CONSTANTS from '../constants.js';
 
 export default {
 
-    changeColor(tool) {
+    changeColor(color) {
         AppDispatcher.handleAction({
             actionType: CONSTANTS.CHANGE_COLOR,
-            data: tool
+            data: color
+        });
+    },
+
+    addSwatchToPalette(color) {
+        AppDispatcher.handleAction({
+            actionType: CONSTANTS.ADD_SWATCH_TO_PALETTE,
+            data: color
         });
     }
 
-};
+}

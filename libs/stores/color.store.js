@@ -1,30 +1,41 @@
 import AppDispatcher from '../dispatcher.js';
-import constants from '../constants.js';
+import CONSTANTS from '../constants.js';
 import objectAssign from 'react/lib/Object.assign';
 import { EventEmitter } from 'events';
 
-import { CHANGE_EVENT } from '../constants.js';
-
-import Tools from '../models/tools.js';
-
 let _store = {
     color: { 'r': 76, 'g': 32, 'b': 76 },
+    palettes: {
+        current: 0,
+        list: []
+    }
 };
 
-/** Private Methods **/
 let _changeColor = function(color) {
         _store.color = color;
+    },
+    _addToCurrentPalette = function(color) {
+        let id = _store.palettes.current;
+
+        if(!_store.palettes.list[id]) {
+            _store.palettes.list[id] = [];
+        }
+
+        _store.palettes.list[id].push(color);
     };
 
-let ToolStore = objectAssign({}, EventEmitter.prototype, {
+let ColorStore = objectAssign({}, EventEmitter.prototype, {
     addChangeListener: function(cb) {
-        this.on(CHANGE_EVENT, cb);
+        this.on(CONSTANTS.CHANGE_EVENT, cb);
     },
     removeChangeListener: function() {
-        this.removeListener(CHANGE_EVENT, cb);
+        this.removeListener(CONSTANTS.CHANGE_EVENT, cb);
     },
     getColor: function() {
         return _store.color;
+    },
+    getPalettes: function() {
+        return _store.palettes;
     }
 });
 
@@ -32,9 +43,13 @@ AppDispatcher.register(function(payload) {
     let action = payload.action;
 
     switch (action.actionType) {
-        case constants.CHANGE_COLOR:
+        case CONSTANTS.CHANGE_COLOR:
             _changeColor(action.data);
-            ToolStore.emit(CHANGE_EVENT);
+            ColorStore.emit(CONSTANTS.CHANGE_EVENT);
+            break;
+        case CONSTANTS.ADD_SWATCH_TO_PALETTE:
+            _addToCurrentPalette(action.data);
+            ColorStore.emit(CONSTANTS.CHANGE_EVENT);
             break;
         default:
             return true;
@@ -42,5 +57,4 @@ AppDispatcher.register(function(payload) {
 
 });
 
-
-export default ToolStore;
+export default ColorStore;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { sendCoordinates } from '../actions/mouse-actions.js';
+import { addMomentToHistory } from '../actions/mouse-actions.js';
 import _ from 'lodash';
 
 export default class Canvas extends Component {
@@ -40,7 +40,7 @@ export default class Canvas extends Component {
                 color: _.clone(this.props.color)
             };
 
-        sendCoordinates({
+        addMomentToHistory({
             vec: {
                 x: x,
                 y: y,

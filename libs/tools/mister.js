@@ -1,4 +1,3 @@
-
 let _getRandomColor = function( initial ) {
         return {
             'r': _randRange(initial.r - 20, initial.r + 20),

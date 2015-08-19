@@ -49,6 +49,7 @@ section {
 
 #color-picker {
     padding: 10px;
+    width: 166px;
 
     .active-color {
         display: block;
@@ -57,7 +58,25 @@ section {
         margin: 0 auto;
     }
 
-    input {
+    .swatch {
+        border: 1px solid transparent;
+        display: inline-block;
+        cursor: pointer;
+        height: 16px;
+        width: 16px;
+
+        &:hover {
+            border-color: pink;
+        }
+    }
+
+    input,
+    button {
         display: block;
     }
+
+    button {
+        margin: 10px auto;
+    }
+
 }

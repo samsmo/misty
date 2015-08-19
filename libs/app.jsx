@@ -19,6 +19,7 @@ export default class App extends Component {
             color: ColorStore.getColor(),
             tool: ToolStore.getTool(),
             history: [],
+            palette: ColorStore.getPalettes(),
             scale: 5
         };
     }
@@ -39,7 +40,8 @@ export default class App extends Component {
         this.setState({
             history: CanvasStore.getCoords(),
             tool: ToolStore.getTool(),
-            color: ColorStore.getColor()
+            color: ColorStore.getColor(),
+            palette: ColorStore.getPalettes()
         });
     }
 
@@ -53,7 +55,10 @@ export default class App extends Component {
                     color= { this.state.color }
                     scale= { this.state.scale }
                 />
-                <ColorPicker color={ this.state.color } />
+                <ColorPicker
+                    color={ this.state.color }
+                    palette={ this.state.palette }
+                />
             </div>
         );
     }
