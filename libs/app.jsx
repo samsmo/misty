@@ -7,8 +7,6 @@ import ToolStore from './stores/tool.store.js';
 import CanvasStore from './stores/canvas.store.js';
 import ColorStore from './stores/color.store.js';
 
-// Not react components.
-
 import "./main.less";
 
 export default class App extends Component {
@@ -20,7 +18,7 @@ export default class App extends Component {
             tool: ToolStore.getTool(),
             history: [],
             palette: ColorStore.getPalettes(),
-            scale: 5
+            scale: 10
         };
     }
 

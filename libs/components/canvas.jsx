@@ -14,7 +14,7 @@ export default class Canvas extends Component {
     }
 
     componentDidMount() {
-        let canvas = document.body.querySelector('canvas'),
+        let canvas = document.getElementById('draw-space'),
             ctx = canvas.getContext('2d');
 
         this.setState({
@@ -30,15 +30,19 @@ export default class Canvas extends Component {
     }
 
     update(e) {
-        if(!this.state.dragging) return;
-
         let x = this.clamp(e.nativeEvent.offsetX, this.props.scale),
             y = this.clamp(e.nativeEvent.offsetY, this.props.scale),
             tool = this.props.tool,
             tried = {
-                scale: this.props.scale,
-                color: _.clone(this.props.color)
-            };
+            scale: this.props.scale,
+            color: _.clone(this.props.color)
+        };
+
+        this.moveCursor(x, y);
+
+        if(!this.state.dragging) return;
+
+
 
         addMomentToHistory({
             vec: {
@@ -54,6 +58,21 @@ export default class Canvas extends Component {
         return (Math.floor(num / top) * top);
     }
 
+    moveCursor(x, y) {
+        let ctx = document.getElementById('mouse-space').getContext('2d');
+
+        ctx.clearRect(0, 0, this.state.width, this.state.height);
+
+        ctx.strokeStyle = '#fff';
+        ctx.fillStyle = '#000';
+
+        ctx.beginPath();
+            ctx.rect(x, y, this.props.scale, this.props.scale);
+            ctx.stroke();
+            ctx.fill();
+        ctx.closePath();
+    }
+
     render() {
 
         if(this.state.ctx) {
@@ -65,8 +84,12 @@ export default class Canvas extends Component {
         }
 
         return (
-            <section>
+            <section id="canvas-container">
+                <canvas id="mouse-space"
+                    height={ this.state.height }
+                    width={ this.state.width }></canvas>
                 <canvas
+                    id="draw-space"
                     height={ this.state.height }
                     width={ this.state.width }
                     onMouseDown={ this.toggleDrag.bind(this) }
