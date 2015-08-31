@@ -18,7 +18,7 @@ export default class App extends Component {
             tool: ToolStore.getTool(),
             history: [],
             palette: ColorStore.getPalettes(),
-            scale: 10
+            scale: 5
         };
     }
 

@@ -40,9 +40,7 @@ export default class Canvas extends Component {
 
         this.moveCursor(x, y);
 
-        if(!this.state.dragging) return;
-
-
+        if(!this.state.dragging && e.type !== 'click') return;
 
         addMomentToHistory({
             vec: {
@@ -67,10 +65,20 @@ export default class Canvas extends Component {
         ctx.fillStyle = '#000';
 
         ctx.beginPath();
-            ctx.rect(x, y, this.props.scale, this.props.scale);
-            ctx.stroke();
-            ctx.fill();
+        ctx.rect(x, y, this.props.scale, this.props.scale);
+        ctx.stroke();
+        ctx.fill();
         ctx.closePath();
+    }
+
+    hideCursor() {
+        let ctx = document.getElementById('mouse-space').getContext('2d');
+
+        ctx.clearRect(0, 0, this.state.width, this.state.height);
+
+        this.setState({
+            dragging: false
+        });
     }
 
     render() {
@@ -92,9 +100,11 @@ export default class Canvas extends Component {
                     id="draw-space"
                     height={ this.state.height }
                     width={ this.state.width }
+                    onClick={ this.update.bind(this)}
                     onMouseDown={ this.toggleDrag.bind(this) }
                     onMouseUp={ this.toggleDrag.bind(this) }
-                    onMouseMove={ this.update.bind(this) } >
+                    onMouseMove={ this.update.bind(this) }
+                    onMouseLeave={ this.hideCursor.bind(this) } >
                 </canvas>
             </section>
         );
